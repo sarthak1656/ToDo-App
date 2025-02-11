@@ -13,13 +13,13 @@ export const getTodo = async (req, res) => {
 
 export const saveTodo = async (req, res) => {
   try {
-    const { Text } = req.body;
+    const { text } = req.body;
 
-    if (!Text) {
-      return res.status(400).json({ error: "Text field is required" });
+    if (!text) {
+      return res.status(400).json({ error: "text field is required" });
     }
 
-    const data = await Todo.create({ Text });
+    const data = await Todo.create({ text });
 
     console.log("Added Successfully...");
     console.log(data);
@@ -33,15 +33,15 @@ export const saveTodo = async (req, res) => {
 
 export const updateTodo = async (req, res) => {
   try {
-    const { _id, Text } = req.body; // Ensure correct field name
+    const { _id, text } = req.body; // Ensure correct field name
 
-    if (!_id || !Text) {
+    if (!_id || !text) {
       return res
         .status(400)
-        .json({ error: "Both _id and Text fields are required" });
+        .json({ error: "Both _id and text fields are required" });
     }
 
-    const updatedTodo = await Todo.findByIdAndUpdate(_id, { Text });
+    const updatedTodo = await Todo.findByIdAndUpdate(_id, { text });
 
     if (!updatedTodo) {
       return res.status(404).json({ error: "Todo not found" });
